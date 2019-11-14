@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="css/style.min.css">
+  <base href="https://igor.wwpass.net/rodeo/">
   <title>Rodeo Star - Главная</title>
 </head>
 <body>
@@ -50,6 +51,24 @@
         </p>
         <button class="button button--action">Получить прайс</button>
       </article>
+      <form class="form form--promo" action="submit" method="post">
+        <fieldset class="form__fieldset">
+          <label class="form__label">
+            <span class="text text--common">Имя</span>
+            <input type="text" class="form__input" id="name" name="name" placeholder="Иван Иванов" required>
+          </label>
+          <label class="form__label">
+            <span class="text text--common">Email</span>
+            <input type="email" class="form__input" id="email" name="email" placeholder="ivan.ivanov@gmail.com" required>
+          </label>
+          <label class="form__label">
+            <span class="text text--common">Телефон</span>
+            <input type="tel" class="form__input" id="phone" name="phone" placeholder="+7(999)123-1415" required>
+          </label>
+            <button class="button button--action" type="submit">Получить прайс</button>
+        </fieldset>
+        {% module xsrf_form_html() %}
+      </form>
       <div class="promo__bg"></div>
     </section>
   </main>

@@ -34,7 +34,7 @@ define('debug', default=False, help='debug mode')
 define('port', default=9008, help='port to run on', type=int)
 define('site_url', default='https://www.wwpass.com/', help='Site URL')
 define('cookie_secret', help='secret key for encode cookie')
-define('email', default="info@wwpass.com", help='email for mails')
+define('email', default="ivladimirskiy@ya.ru", help='email for mails')
 define('counters', default=False, help='add counters on the pages', type=bool)
 
 
@@ -188,36 +188,22 @@ class SubmitFormHandler(BaseHandler):
         self.redirect('/')
 
     def post(self):
-        form_first_name = self.get_argument('firstName', None)
-        form_last_name = self.get_argument('lastName', None)
-        form_company_name = self.get_argument('companyName', None)
-        form_position = self.get_argument('whoIAm', None)
+        form_name = self.get_argument('name', None)
         form_email = self.get_argument('email', None)
         form_phone = self.get_argument('phone', None)
-        form_text = self.get_argument('text', None)
         form_browser_date = self.get_argument('browserDate', None)
         form_url = self.get_argument('url', None)
-        form_industry = self.get_argument('industry', None)
-
-        form_type = self.get_argument('formType', False)
 
         try:
-            info(repr(form_first_name))
-            info(repr(form_last_name))
-            info(repr(form_company_name))
+            info(repr(form_name))
             info(repr(form_email))
             info(repr(form_phone))
 
             message_text = self.render_string(
                 'mails/talk.txt',
-                first_name=form_first_name,
-                last_name=form_last_name,
-                company_name=form_company_name,
+                name=form_name,
                 email=form_email,
                 phone=form_phone,
-                text=form_text,
-                position=form_position,
-                industry=form_industry,
 
                 browser_date=form_browser_date,
                 url=form_url
@@ -225,41 +211,25 @@ class SubmitFormHandler(BaseHandler):
 
             subject = 'Request from site: %s UTC' % datetime.utcnow()
 
-            if form_url:
-                if form_type == 'ebook':
-                    self.settings['mc'].lists.members.create('d85d0743b5', {
-                        'email_address': form_email,
-                        'status': 'subscribed',
-                        'merge_fields': {
-                            'FNAME': form_first_name or '',
-                            'LNAME': form_last_name or '',
-                        },
-                    })
-
-                    send_bcc_email(
-                        'noreply@wwpass.com',
-                        options.email,
-                        '2750527@bcc.hubspot.com',
-                        subject,
-                        message_text)
-                    info('send_bcc_email: %s' % form_email)
-                else:
-                    send_email('noreply@wwpass.com', options.email, subject, message_text)
-                    info('send_mail: %s' % form_email)
+            # if form_url:
+                
+            send_email('noreply@wwpass.com', form_email, subject, message_text)
+            send_email('noreply@wwpass.com', options.email, subject, message_text)
+            info('send_mail: %s' % form_email)
+            
         except Exception as e:
             exception(e)
-            error(repr(form_first_name))
-            error(repr(form_last_name))
-            error(repr(form_company_name))
+            error(repr(form_name))
             error(repr(form_email))
             error(repr(form_phone))
 
         # self.write('post::submitForm')
         # self.finish()
 
-        template = 'submit-%s.html' % form_type if form_type in SUBMIT_TMP else 'submit.html'
+        # template = 'submit-%s.html' % form_type if form_type in SUBMIT_TMP else 'submit.html'
 
-        self.render(template)
+        # self.render(template)
+        self.write('done')
 
 """
 # MailChimp Add User
@@ -402,11 +372,15 @@ class App(Application):
     def __init__(self):
 
         handlers = [
-            # ('/submit', SubmitFormHandler),
+            ('/submit', SubmitFormHandler),
             # ('/submit/', SubmitFormHandler),
 
 
             ('/', HomePage),
+
+            ('/file', TemplatePage, {
+              'template': 'tickets.pdf'
+            }),
 
 
             ('/error', TestHandler),
