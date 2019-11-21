@@ -40,40 +40,238 @@
   </header>
   <main class="pageMain">
     <section class="promo">
-      <article class="promo__article">
-        <h2 class="heading heading--h1 heading--action heading--light promo__content">
-          Зарабатывайте
-          <br>
-          <span class="heading--common heading--uppercase">вместе с нами</span>
-        </h2>
-        <p class="text text--common text--paddingBottom promo__content">
-          Станьте официальным поставщиком популярных халяльных энергетиков <span class="text--action">Rodeo Star</span> и <span class="text--action">Black Lion</span> в свой регион&nbsp;и&nbsp;получайте до 100% маржи&nbsp;с&nbsp;каждой банки.
-        </p>
-        <button class="button button--action">Получить прайс</button>
-      </article>
-      <form class="form form--promo" action="submit" method="post">
-        <fieldset class="form__fieldset">
-          <label class="form__label">
-            <span class="text text--common">Имя</span>
-            <input type="text" class="form__input" id="name" name="name" placeholder="Иван Иванов" required>
-          </label>
-          <label class="form__label">
-            <span class="text text--common">Email</span>
-            <input type="email" class="form__input" id="email" name="email" placeholder="ivan.ivanov@gmail.com" required>
-          </label>
-          <label class="form__label">
-            <span class="text text--common">Телефон</span>
-            <input type="tel" class="form__input" id="phone" name="phone" placeholder="+7(999)123-1415" required>
-          </label>
-            <button class="button button--action" type="submit">Получить прайс</button>
-        </fieldset>
-        {% module xsrf_form_html() %}
-      </form>
+      <div class="promo__wrapper">
+        <article class="promo__article">
+          <h2 class="heading heading--h1 heading--action heading--light promo__content">
+            Зарабатывайте
+            <br>
+            <span class="heading--common heading--uppercase">вместе с нами</span>
+          </h2>
+          <p class="text text--common text--paddingBottom promo__content">
+            Станьте официальным поставщиком популярных халяльных энергетиков <span class="text--action">Rodeo Star</span> и <span class="text--action">Black Lion</span> в свой регион&nbsp;и&nbsp;получайте до 100% маржи&nbsp;с&nbsp;каждой банки.
+          </p>
+          <div class="button button--action">Получить прайс</div>
+        </article>
+        <form class="form form--promo" action="/submit" method="post">
+          <fieldset class="form__fieldset">
+            <label class="form__label">
+              <span class="text text--common">Имя</span>
+              <input type="text" class="form__input" id="form_name" name="form_name" placeholder="Иван Иванов" required>
+            </label>
+            <label class="form__label">
+              <span class="text text--common">Email</span>
+              <input type="email" class="form__input" id="form_email" name="form_email" placeholder="ivan.ivanov@gmail.com" required>
+            </label>
+            <label class="form__label">
+              <span class="text text--common">Телефон</span>
+              <input type="tel" class="form__input" id="form_phone" name="form_phone" placeholder="+7(999)123-1415" required>
+            </label>
+              <button class="button button--action" type="submit">Получить прайс</button>
+          </fieldset>
+        </form>   
+      </div>
       <div class="promo__bg"></div>
     </section>
+    <section class="content">
+      <article class="content__article">
+        <p class="text text--common text--center">
+          Поставляем в РФ напрямую от производителя халяльные энергетики с отличным составом. Расширяем сеть дистрибьютеров по стране – ищем региональных партнеров. Станьте официальным дилером в своем регионе и зарабатывайте на продаже продукта, уже завоевавшего международный рынок.
+        </p>
+        <h2 class="heading heading--h2 heading--common heading--center heading--marginTop-big heading--narrow">Преимущества сотрудничества</h2>
+        <div class="hr"></div>
+        <ul class="advantages">
+          <li class="advantages__item">
+            <img src="img/icons/icon-product.png" width="" height="" alt="">
+            <p class="text text--common">Прямые поставки из Турции</p>
+          </li>
+          <li class="advantages__item">
+            <img src="img/icons/icon-money.png" width="" height="" alt="">
+            <p class="text text--common">Минимальные цены</p>
+          </li>
+          <li class="advantages__item">
+            <img src="img/icons/icon-winner.png" width="" height="" alt="">
+            <p class="text text--common">Гарантии качества</p>
+          </li>
+          <li class="advantages__item">
+            <img src="img/icons/icon-shipping-and-delivery.png" width="" height="" alt="">
+            <p class="text text--common">Партии любого объема</p>
+          </li>
+          <li class="advantages__item">
+            <img src="img/icons/icon-call-center.png" width="" height="" alt="">
+            <p class="text text--common">Полное сопровождение</p>
+          </li>
+          <li class="advantages__item">
+            <img src="img/icons/icon-ad.png" width="" height="" alt="">
+            <p class="text text--common">Полное сопровождение</p>
+          </li>
+        </ul>
+      </article>
+      <article class="content__article content__article--sales">
+        <h2 class="heading heading--h2 heading--common heading--center heading--marginTop-big heading--narrow">Миллионные продажи в Турции, Индии, странах Азии и ЕС</h2>
+        <div class="hr"></div>
+        <p class="text text--common text--center">
+          Энергетические напитки Rodeo Star и Black Lion – популярный продукт, пользующийся спросом на территории Турции (страна производства),Индии и других стран. Секрет успеха прост – энергетик обладает отличными вкусовыми характеристиками, приятным ароматом, полезнымдля здоровья составом.
+        </p>
+        <ol class="sales">
+          <li class="sales__item">
+            <p class="text text--common">Используются только качественные ингредиенты, прошедшие строгий отбор.</p>
+          </li>
+          <li class="sales__item">
+            <p class="text text--common">Безопасность подтверждена Декларацией о соответствии Евразийского экономического союза.</p>
+          </li>
+          <li class="sales__item">
+            <p class="text text--common">Производятся без алкоголя, ГМО и опасных для здоровья соединений.</p>
+          </li>
+          <li class="sales__item">
+            <p class="text text--common">Уменьшенное содержание кофеина позволяет пить больше энергетика без вреда для сосудов и сердца.</p>
+          </li>
+          <li class="sales__item">
+            <p class="text text--common">Комплекс витаминов группы В обеспечивает бодрость, улучшает метаболизм, укрепляет иммунитет.</p>
+          </li>
+          <li class="sales__item">
+            <p class="text text--common">Полностью соответствует международным стандартам Халяль (Halal).</p>
+          </li>
+        </ol>
+        <div class="dots"></div>
+        <h3 class="heading heading--h3 heading--common heading--center heading--marginTop-big">Станьте единственным в своем регионе официальным дилером популярнейшего напитка и зарабатывайте, пока это место не занял ваш конкурент!</h3>
+      </article>
+    </section>
+    <section class="content content--wide">
+      <article class="content__article content__article--knowhow knowhow">
+        <img src="img/knowhow@1x.png" alt="" class="knowhow__img">
+        <div class="knowhow__content">
+          <h2 class="heading heading--h2 heading--common">Знаем, как продавать больше, и научим вас это делать</h2>
+          <div class="hr hr--center-mobile"></div>
+          <p class="text text--common">
+            Являемся единственным в России дистрибьютором халяльных энергетиков Rodeo Star и Black Lion. Работаем с непосредственным производителем продукта – турецкой компанией, которой принадлежат права на бренды. Предоставляем полный пакет документов. Предлагаем самую низкую в РФ цену.
+          </p>
+          <div class="button button--action button--center-mobile">Получить прайс</div>
+        </div>
+      </article>
+      <article class="content__article content__article--map map">
+        <div class="map__content">
+          <h2 class="heading heading--h2 heading--common">Найдите свой регион на карте нашей дилерской сети</h2>
+          <div class="hr hr--center-mobile"></div>
+          <p class="text text--common">
+            После нахождения своего региона заполните завку или свяжитесь с нами, позвоним по номеру, указанному на сайте. Ответим на все ваши вопросы и дадим максимально полную информацию о сотрудничестве.
+          </p>
+        </div>
+        <img src="img/map@1x.png" alt="" class="map__img">
+      </article>
+      <article class="content__article content__article--advantages">
+        <h2 class="heading heading--h2 heading--common heading--center heading--marginTop-big heading--narrow">Эта часть работы ляжет на ваши плечи</h2>
+        <div class="hr"></div>
+        <p class="text text--common text--center">
+          Если в вашем регионе еще нет официального представителя, вы уже сегодня можете им стать и зарабатывать на популярном продукте. Для этого вам нужно:
+        </p>
+        <ul class="advantages advantages--yourWork">
+          <li class="advantages__item">
+            <img src="img/icons/icon-list.png" width="" height="" alt="">
+            <p class="text text--common">Следовать нашим инструкциям.</p>
+          </li>
+          <li class="advantages__item">
+            <img src="img/icons/icon-maps-and-location.png" width="" height="" alt="">
+            <p class="text text--common">Находить новые точки сбыта.</p>
+          </li>
+          <li class="advantages__item">
+            <img src="img/icons/icon-location.png" width="" height="" alt="">
+            <p class="text text--common">Расширять географию оптовых поставок.</p>
+          </li>
+          <li class="advantages__item">
+            <img src="img/icons/icon-shelf.png" width="" height="" alt="">
+            <p class="text text--common">Активно предлагать халяльные энергетики на полки розничных магазинов&nbsp;и&nbsp;сетей.</p>
+          </li>
+          <li class="advantages__item">
+            <img src="img/icons/icon-conversation.png" width="" height="" alt="">
+            <p class="text text--common">Вести переговоры с потенциальными заказчиками.</p>
+          </li>
+          <li class="advantages__item">
+            <img src="img/icons/icon-up.png" width="" height="" alt="">
+            <p class="text text--common">Использовать предоставленные нами рекламные материалы для продвижения продукта.</p>
+          </li>
+        </ul>
+      </article>
+    </section>
+    <section class="content">
+
+      <article class="content__article content__article--sales">
+        <h2 class="heading heading--h2 heading--common heading--center heading--marginTop-big heading--narrow">Что будем делать мы</h2>
+        <div class="hr"></div>
+        <p class="text text--common text--center">
+          Мы обеспечиваем всестороннюю помощь и поддержку на всех этапах сотрудничества.<br>Ответим на любые интересующие вас вопросы.
+        </p>
+        <ul class="wedo">
+          <li class="wedo__item wedo__item--1">
+            <h4 class="heading heading--h4 heading--light heading--common">Проведем персональную консультацию</h4>
+            <div class="hr hr--small"></div>
+            <p class="text text--common text--sm">Расскажем обо всех достоинствах напитков, подскажем оптимальные способы сбыта.</p>
+          </li>
+          <li class="wedo__item wedo__item--2">
+            <h4 class="heading heading--h4 heading--light heading--common">Организуем регулярные поставки</h4>
+            <div class="hr hr--small"></div>
+            <p class="text text--common text--sm">Партия любого объема будет у вас максимум через 4-7 дней.</p>
+          </li>
+          <li class="wedo__item wedo__item--3">
+            <h4 class="heading heading--h4 heading--light heading--common">Обеспечим всестороннюю поддержку</h4>
+            <div class="hr hr--small"></div>
+            <p class="text text--common text--sm">Ответим на на ваши вопросы в любой момент с 8:00 до 22:00</p>
+          </li>
+          <li class="wedo__item wedo__item--4">
+            <h4 class="heading heading--h4 heading--light heading--common">Предоставим необходимую документацию</h4>
+            <div class="hr hr--small"></div>
+            <p class="text text--common text--sm">Перешлем все необходимые для реализации энергетиков документы.</p>
+          </li>
+          <li class="wedo__item wedo__item--5">
+            <h4 class="heading heading--h4 heading--light heading--common">Снабдим рекламными материалами</h4>
+            <div class="hr hr--small"></div>
+            <p class="text text--common text--sm">Самостоятельно изготовим POS и другую рекламу специально для вас.</p>
+          </li>
+          <li class="wedo__item wedo__item--6">
+            <h4 class="heading heading--h4 heading--light heading--common">Организуем масштабное продвижение</h4>
+            <div class="hr hr--small"></div>
+            <p class="text text--common text--sm">Обеспечим постоянный рост узнаваемости продукта и потребительского спроса.</p>
+          </li>
+        </ul>
+      </article>
+    </section>
+    <section class="content content--wide">
+      <article class="content__article content__article--coop">
+        <h3 class="heading heading--h3 heading--common heading--center heading--marginTop-big heading--narrow heading--light">Ваши преимущества сотрудничества с нами</h3>
+        <ol class="advantages advantages--coop advantages--yourWork">
+          <li class="advantages__item advantages__item--coop">
+            <h4 class="heading heading--h4 heading--light heading--common heading--action heading--marginBottom-0">Расширите ассортимент</h4>
+            <p class="text text--common text--sm text--marginTop-0 text--light">Сможете продавать продукты узнаваемых брендов Rodeo Star и Black Lion.</p>
+          </li>
+          <li class="advantages__item advantages__item--coop">
+            <h4 class="heading heading--h4 heading--light heading--common heading--action heading--marginBottom-0">Увеличите прибыль</h4>
+            <p class="text text--common text--sm text--marginTop-0 text--light">Низкая закупочная цена – 30 рублей без НДС – позволит устанавливать наценку в 30 – 100%.</p>
+          </li>
+          <li class="advantages__item advantages__item--coop">
+            <h4 class="heading heading--h4 heading--light heading--common heading--action heading--marginBottom-0">Получите новых клиентов</h4>
+            <p class="text text--common text--sm text--marginTop-0 text--light">Будем направлять к вам своих собственных покупателей из вашего города и региона.</p>
+          </li>
+          <li class="advantages__item advantages__item--coop">
+            <h4 class="heading heading--h4 heading--light heading--common heading--action heading--marginBottom-0">Снизите затраты на рекламу</h4>
+            <p class="text text--common text--sm text--marginTop-0 text--light">Предоставим готовые рекламные материалы для ускорения продвижения продукта.</p>
+          </li>
+          <li class="advantages__item advantages__item--coop">
+            <h4 class="heading heading--h4 heading--light heading--common heading--action heading--marginBottom-0">Выйдите на международный рынок</h4>
+            <p class="text text--common text--sm text--marginTop-0 text--light">Реализуя продукт, мегапопулярный за рубежом, выведите собственный бизнес на новую высоту.</p>
+          </li>
+          <li class="advantages__item advantages__item--coop">
+            <h4 class="heading heading--h4 heading--light heading--common heading--action heading--marginBottom-0">Станете единственным в регионе</h4>
+            <p class="text text--common text--sm text--marginTop-0 text--light">Место официального дилера навсегда останется за вами, и никто другой его не получит.</p>
+          </li>
+        </ol>
+      </article>
+    </section>
+
   </main>
   <footer class="pageFooter">
-    Футер!
+    <img src="img/logo.png" width="73" height="88" alt="" class="logo">
+    <a href="tel:88007654321" class="mainNav__link mainNav__link--phone pageFooter__phone">8 800 765 43 21</a>
+    <div class="button button--common button--ghost">Обратный звонок</div>
+    <div class="button button--action pageFooter__last">Получить прайс</div>
   </footer>
   <script src="js/mainNav/mainNav.js"></script>
   
