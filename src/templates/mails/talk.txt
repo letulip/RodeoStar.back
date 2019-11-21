@@ -1,0 +1,18 @@
+Hello
+
+This request was sent from www.wwpass.com
+{% if browser_date or url %}
+
+{% if browser_date %}Browser date: {{ browser_date }}{% end %}
+{% if url %}From page: {{ url }}{% end %}
+
+{% end %}
+---
+
+First name: {{ name }}
+Phone: {{ phone }}
+Email: {{ email }}
+
+Message:
+
+NO!
