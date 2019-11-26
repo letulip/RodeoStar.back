@@ -87,36 +87,7 @@ def send_email(sender, recipient, subject, text, server='localhost'):
     # Optionally - send it – using python's smtplib
     # or just use Django's
     s = smtplib.SMTP(server)
-    # s.ehlo()
-    # s.starttls()
-    # s.ehlo()
-    # s.login("", "")
     s.sendmail(sender, recipient, str_io.getvalue())
-
-def send_bcc_email(sender, recipient, bcc, subject, text, server='localhost'):
-    msg = MIMEMultipart('alternative')
-    msg['Subject'] = subject
-    msg['From'] = sender
-    msg['To'] = recipient
-    msg['BCC'] = bcc
-
-    textpart = MIMEText(text, 'plain', 'UTF-8')
-    msg.attach(textpart)
-
-    str_io = StringIO()
-    g = Generator(str_io, False)
-    g.flatten(msg)
-    s = smtplib.SMTP(server)
-    s.sendmail(sender, [recipient, bcc], str_io.getvalue())
-
-
-SUBMIT_TMP = ('demo', 'ebook')
-BLOG_RSS_FEED_URL = 'https://www.wwpass.com/blog/blog.rss'
-blog_feed = {
-    'last_update': None,
-    'items': [],
-    'posts': []
-}
 
 
 class MixinCustomHandler():
@@ -159,19 +130,6 @@ class MixinCustomHandler():
             manage_domain='manage.wwpass.com',
             location_has_seo_stop_words=self.location_has_seo_stop_words,
             **kwargs)
-
-        # if self.settings.get("serve_traceback") and "exc_info" in kwargs:
-        #     # in debug mode, try to send a traceback
-        #     self.set_header('Content-Type', 'text/plain')
-        #     for line in traceback.format_exception(*kwargs["exc_info"]):
-        #         self.write(line)
-        #     self.finish()
-        # else:
-        #     self.finish("<html><title>%(code)d: %(message)s</title>"
-        #                 "<body>%(code)d: %(message)s</body></html>" % {
-        #                     "code": status_code,
-        #                     "message": self._reason,
-        #                 })
 
 
 class BaseHandler(MixinCustomHandler, RequestHandler):
@@ -231,19 +189,6 @@ class SubmitFormHandler(BaseHandler):
         # self.render(template)
         self.write('done')
 
-"""
-# MailChimp Add User
-# add John Doe with email john.doe@example.com to list matching id '123456'
-
-client.lists.members.create('123456', {
-    'email_address': 'john.doe@example.com',
-    'status': 'subscribed',
-    'merge_fields': {
-        'FNAME': 'John',
-        'LNAME': 'Doe',
-    },
-})
-"""
 
 class OGParser(HTMLParser):
     og = {}
@@ -266,64 +211,18 @@ class OGParser(HTMLParser):
 class HomePage(BaseHandler):
     @gen.coroutine
     def get(self):
-        if not blog_feed['items'] or \
-            not blog_feed['last_update'] or \
-            datetime.utcnow() > blog_feed['last_update'] + timedelta(hours=2):
-
-            info('Fetch Blog Feed')
-            raw_blog_feed = feedparser.parse(BLOG_RSS_FEED_URL)
-
-            # debug(raw_blog_feed['entries'][0].keys())
-            # debug(json.dumps((raw_blog_feed['entries'][0]), indent=2))
-
-            blog_feed['last_update'] = datetime.utcnow()
-            blog_feed['items'] = raw_blog_feed['entries']
-            blog_feed['posts'] = []
-            last_blog = blog_feed['items'][:3]
-            for item in last_blog:
-                http_client = AsyncHTTPClient()
-                response = yield http_client.fetch(item['link'])
-                http_client.close()
-
-                p = OGParser()
-                p.feed(response.body.decode('utf-8'))
-                og = p.get_og()
-
-                blog_feed['posts'].append({
-                    'link': item['link'],
-                    'title': item['title'],
-                    'published_parsed': item['published_parsed'],
-                    'author': item['author_detail']['name'],
-                    'image': og['image'],
-                    'description': og['description']
-                })
-        
-        blog_feed_last_items = blog_feed['posts']
-        # articles_last_items = articles[:3]
-        # for item in blog_feed_last_items:
-        #     debug(item['link'])
-        #     self.write(item['title'] + '\n')
-        # self.finish()
 
         self.render('main-landing.html',
             alternative=True,
-            blog_feed=blog_feed_last_items,
-            # articles=articles_last_items,
             datetime=datetime,
             mktime=mktime
             )
 
 
-class TestHandler(BaseHandler):
+class ErrorHandler(BaseHandler):
 
     def get(self):
         raise HTTPError(500)
-
-
-# class Newsroom(BaseHandler):
-
-#     def get(self):
-#         self.render('newsroom.html', articles=articles)
 
 
 class TemplatePage(BaseHandler):
@@ -334,32 +233,6 @@ class TemplatePage(BaseHandler):
 
     def get(self):
         self.render(self.template, alternative=self.alternative)
-
-
-class ProxyAPI(RequestHandler):
-
-    @gen.coroutine
-    def get(self):
-        # /api/version.txt?type=soft&platform=osx.10.11&package=pack
-
-        # self.write(repr(self.request.uri))
-
-        # atype = self.get_argument('type', None)
-        # aplatform = self.get_argument('platform', None)
-        # apackage = self.get_argument('package', None)
-
-        url = 'https://a2.wwpass.com%s' % self.request.uri
-        http_client = AsyncHTTPClient()
-        response = yield http_client.fetch(url)
-
-        # TODO: add correct status_code
-        self.write(response.body)  # response
-
-        debug(url)
-        debug(response.code)
-        debug(repr(response.body))
-
-        # raise HTTPError(404)
 
 
 base_path = os.path.abspath(os.path.dirname(__file__))
@@ -383,7 +256,7 @@ class App(Application):
             }),
 
 
-            ('/error', TestHandler),
+            ('/error', ErrorHandler),
 
 
             # ('/google9662725d6bb89c83.html', TemplatePage, {
