@@ -16,8 +16,6 @@ from email.generator import Generator
 import smtplib
 
 from time import mktime
-from html.parser import HTMLParser
-
 
 from tornado.web import (Application, RedirectHandler, RequestHandler,
                          StaticFileHandler, HTTPError)
@@ -25,9 +23,6 @@ from tornado.ioloop import IOLoop
 from tornado.options import (
     parse_config_file, parse_command_line, define, options)
 from tornado import autoreload, gen
-from tornado.httpclient import AsyncHTTPClient
-
-import feedparser
 
 
 define('debug', default=False, help='debug mode')
@@ -190,24 +185,6 @@ class SubmitFormHandler(BaseHandler):
         self.write('done')
 
 
-class OGParser(HTMLParser):
-    og = {}
-
-    def handle_starttag(self, tag, attrs):
-        if tag == 'meta':
-            try:
-                matches = next(x for x in attrs if x[0] == 'property')
-                name_og = matches[1]
-                if name_og.startswith('og:'):
-                    matches = next(x for x in attrs if x[0] == 'content')
-                    self.og[name_og[3:]] = matches[1]
-            except StopIteration as e:
-                pass
-    
-    def get_og(self):
-        return self.og
-
-
 class HomePage(BaseHandler):
     @gen.coroutine
     def get(self):
@@ -246,7 +223,6 @@ class App(Application):
 
         handlers = [
             ('/submit', SubmitFormHandler),
-            # ('/submit/', SubmitFormHandler),
 
 
             ('/', HomePage),
