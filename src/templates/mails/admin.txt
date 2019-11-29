@@ -1,0 +1,14 @@
+Привет!
+
+Кто-то скачал прайс-лист с сайта rodeostar.ru детали ниже, ты рад?
+{% if browser_date or url %}
+
+{% if browser_date %}Browser date: {{ browser_date }}{% end %}
+{% if url %}From page: {{ url }}{% end %}
+
+{% end %}
+---
+
+Имя: {{ name }}
+Телефон: {{ phone }}
+Почта: {{ email }}

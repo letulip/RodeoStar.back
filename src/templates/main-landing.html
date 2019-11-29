@@ -22,7 +22,7 @@
           <a href="#TODO" class="mainNav__link">Преимущества</a>
         </li>
         <li class="mainNav__item mainNav__item--mobile">
-          <a href="/contacts.html" class="mainNav__link">Контакты</a>
+          <a href="./contacts.html" class="mainNav__link">Контакты</a>
         </li>
         <li class="mainNav__item mainNav__item--wide">
           <a href="tel:88007654321" class="mainNav__link mainNav__link--phone">8 800 765 43 21</a>
@@ -256,7 +256,7 @@
 
   </main>
 
-  <form class="form form--promo" action="/submit" method="post">
+  <form class="form form--promo" action="./submit" method="post">
     <fieldset class="form__fieldset">
       <label class="form__label">
         <span class="text text--light-grey text--sm">Ваше имя</span>
@@ -272,6 +272,7 @@
       </label>
         <button class="button button--action button--center button--getPrice-submit" type="submit">Получить прайс</button>
     </fieldset>
+    {% module xsrf_form_html() %}
   </form>
 
   <div class="overlay"></div>

@@ -1,18 +1,26 @@
-Hello
+Приветствую!
 
-This request was sent from www.wwpass.com
+Вы запросили прайс-лист на сайте RodeoStar.ru прямую ссылку на файл вы найдете ниже.
 {% if browser_date or url %}
 
 {% if browser_date %}Browser date: {{ browser_date }}{% end %}
 {% if url %}From page: {{ url }}{% end %}
 
 {% end %}
+
+
+Ссылка на прайс-лист №1: {{ file_1 }}
+Ссылка на прайс-лист №2: {{ file_2 }}
 ---
 
-First name: {{ name }}
-Phone: {{ phone }}
-Email: {{ email }}
+Наши контакты: 
 
-Message:
+ООО «Торговая компания «Эльбрус»
+125363, г. Москва, ул Фабрициуса, д.42, эт.1, пом.II, корп.1
 
-NO!
++7 (999) 714-24-27
++7 (977) 870-79-98
+
+ИНН 7733228256
+ОГРН 1157746281395
+КПП
