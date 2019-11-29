@@ -181,7 +181,9 @@ class SubmitFormHandler(BaseHandler):
 
         # template = 'submit-%s.html' % form_type if form_type in SUBMIT_TMP else 'submit.html'
 
-        # self.render(template)
+        template = 'submit.html'
+
+        self.render(template)
         self.write('done')
 
 
