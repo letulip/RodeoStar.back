@@ -167,8 +167,8 @@ class SubmitFormHandler(BaseHandler):
                 name=form_name,
                 email=form_email,
                 phone=form_phone,
-                file_1='https://igor.wwpass.net/rodeo/pdf/tickets.pdf',
-                file_2='link to file 2',
+                file_1='https://igor.wwpass.net/rodeo/pdf/price_rodeo_star.pdf',
+                file_2='https://igor.wwpass.net/rodeo/pdf/price_black_lion.pdf',
 
                 browser_date=form_browser_date,
                 url=form_url
@@ -238,11 +238,13 @@ class App(Application):
         handlers = [
             ('/submit', SubmitFormHandler),
 
-
             ('/', HomePage),
 
             ('/file', TemplatePage, {
               'template': 'tickets.pdf'
+            }),
+            ('/contacts', TemplatePage, {
+              'template': 'contacts.html'
             }),
 
 
