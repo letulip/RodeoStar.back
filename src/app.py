@@ -141,9 +141,9 @@ class SubmitFormHandler(BaseHandler):
         self.redirect('/')
 
     def post(self):
-        form_name = self.get_argument('name', None)
-        form_email = self.get_argument('email', None)
-        form_phone = self.get_argument('phone', None)
+        form_name = self.get_argument('form_name', None)
+        form_email = self.get_argument('form_email', None)
+        form_phone = self.get_argument('form_phone', None)
         form_browser_date = self.get_argument('browserDate', None)
         form_url = self.get_argument('url', None)
 
@@ -152,11 +152,23 @@ class SubmitFormHandler(BaseHandler):
             info(repr(form_email))
             info(repr(form_phone))
 
-            message_text = self.render_string(
+            message_text_admin = self.render_string(
+                'mails/admin.txt',
+                name=form_name,
+                email=form_email,
+                phone=form_phone,
+
+                browser_date=form_browser_date,
+                url=form_url
+            )
+
+            message_text_client = self.render_string(
                 'mails/talk.txt',
                 name=form_name,
                 email=form_email,
                 phone=form_phone,
+                file_1='https://igor.wwpass.net/rodeo/pdf/price_rodeo_star.pdf',
+                file_2='https://igor.wwpass.net/rodeo/pdf/price_black_lion.pdf',
 
                 browser_date=form_browser_date,
                 url=form_url
@@ -166,8 +178,8 @@ class SubmitFormHandler(BaseHandler):
 
             # if form_url:
                 
-            send_email('noreply@wwpass.com', form_email, subject, message_text)
-            send_email('noreply@wwpass.com', options.email, subject, message_text)
+            send_email('noreply@wwpass.com', form_email, subject, message_text_client, '127.0.0.1')
+            send_email('noreply@wwpass.com', options.email, subject, message_text_admin, '127.0.0.1')
             info('send_mail: %s' % form_email)
             
         except Exception as e:
@@ -181,8 +193,10 @@ class SubmitFormHandler(BaseHandler):
 
         # template = 'submit-%s.html' % form_type if form_type in SUBMIT_TMP else 'submit.html'
 
-        # self.render(template)
-        self.write('done')
+        template = 'submit.html'
+
+        self.render(template)
+        # self.write('done')
 
 
 class HomePage(BaseHandler):
@@ -224,11 +238,13 @@ class App(Application):
         handlers = [
             ('/submit', SubmitFormHandler),
 
-
             ('/', HomePage),
 
             ('/file', TemplatePage, {
               'template': 'tickets.pdf'
+            }),
+            ('/contacts', TemplatePage, {
+              'template': 'contacts.html'
             }),
 
 
