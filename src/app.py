@@ -167,8 +167,8 @@ class SubmitFormHandler(BaseHandler):
                 name=form_name,
                 email=form_email,
                 phone=form_phone,
-                file_1='https://igor.wwpass.net/rodeo/pdf/price_rodeo_star.pdf',
-                file_2='https://igor.wwpass.net/rodeo/pdf/price_black_lion.pdf',
+                file_1='https://test.rodeostar.ru/pdf/price_rodeo_star.pdf',
+                file_2='https://test.rodeostar.ru/pdf/price_black_lion.pdf',
 
                 browser_date=form_browser_date,
                 url=form_url
@@ -209,6 +209,15 @@ class HomePage(BaseHandler):
             mktime=mktime
             )
 
+class ContactsPage(BaseHandler):
+    @gen.coroutine
+    def get(self):
+
+        self.render('contacts.html',
+            alternative=True,
+            datetime=datetime,
+            mktime=mktime
+            )
 
 class ErrorHandler(BaseHandler):
 
@@ -239,12 +248,10 @@ class App(Application):
             ('/submit', SubmitFormHandler),
 
             ('/', HomePage),
+            ('/contacts', ContactsPage),
 
             ('/file', TemplatePage, {
               'template': 'tickets.pdf'
-            }),
-            ('/contacts', TemplatePage, {
-              'template': 'contacts.html'
             }),
 
 
