@@ -28,7 +28,7 @@
           <a href="tel:+78007654321" class="mainNav__link mainNav__link--phone">8 800 765 43 21</a>
         </li>
         <li class="mainNav__item mainNav__item--wide mainNav__item--mobile mainNav__item--marginTop-mobile mainNav__item--noBorderBottom">
-          <a href="#TODO" class="button button--ghost">Обратный звонок</a>
+          <div class="button button--common button--ghost button--callMe">Обратный звонок</div>
         </li>
         <li class="mainNav__item mainNav__item--burger">
           <div class="mainNav__burger">
@@ -66,30 +66,12 @@
 
   </main>
 
-  <form class="form form--promo" action="/submit" method="post">
-    <fieldset class="form__fieldset">
-      <label class="form__label">
-        <span class="text text--light-grey text--sm">Ваше имя</span>
-        <input type="text" class="form__input" id="form_name" name="form_name" placeholder="Иван Иванов" required>
-      </label>
-      <label class="form__label">
-        <span class="text text--light-grey text--sm">Телефон</span>
-        <input type="tel" class="form__input form__input--tel" id="form_phone" name="form_phone" placeholder="+7(999)123-1415" required>
-      </label>
-      <label class="form__label">
-        <span class="text text--light-grey text--sm">E-mail</span>
-        <input type="email" class="form__input" id="form_email" name="form_email" placeholder="ivan.ivanov@mail.ru" required>
-      </label>
-        <button class="button button--action button--center button--getPrice-submit" type="submit">Получить прайс</button>
-    </fieldset>
-  </form>
-
   <div class="overlay"></div>
 
   <footer class="pageFooter">
     <a href="./"><img src="img/logo.png" width="73" height="88" alt="Логотип РодеоСтар" class="logo"></a>
     <a href="tel:+78007654321" class="mainNav__link mainNav__link--phone pageFooter__phone">8 800 765 43 21</a>
-    <div class="button button--common button--ghost">Обратный звонок</div>
+    <div class="button button--common button--ghost button--callMe">Обратный звонок</div>
     <div class="button button--action pageFooter__last button--getPrice">Получить прайс</div>
   </footer>
   <script src="js/mainNav/mainNav.js"></script>

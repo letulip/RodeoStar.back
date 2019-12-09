@@ -174,12 +174,12 @@ class SubmitFormHandler(BaseHandler):
                 url=form_url
             )
 
-            subject = 'Request from site: %s UTC' % datetime.utcnow()
-
+            subject_client = 'Вы запросили прайс RodeoStar: %s' % datetime.now()
+            subject_manager = '%s запросил прайс RodeoStar: %s' % (form_name, datetime.now())
             # if form_url:
                 
-            send_email('noreply@rodeostar.ru', form_email, subject, message_text_client, '127.0.0.1')
-            send_email('noreply@rodeostar.ru', options.email, subject, message_text_admin, '127.0.0.1')
+            send_email('noreply@rodeostar.ru', form_email, subject_client, message_text_client, '127.0.0.1')
+            send_email('noreply@rodeostar.ru', options.email, subject_manager, message_text_admin, '127.0.0.1')
             info('send_mail: %s' % form_email)
             
         except Exception as e:
@@ -198,6 +198,49 @@ class SubmitFormHandler(BaseHandler):
         self.render(template)
         # self.write('done')
 
+class CallMeFormHandler(BaseHandler):
+    def get(self):
+        self.redirect('/')
+
+    def post(self):
+        form_name = self.get_argument('form_name', None)
+        form_phone = self.get_argument('form_phone', None)
+        form_browser_date = self.get_argument('browserDate', None)
+        form_url = self.get_argument('url', None)
+
+        try:
+            info(repr(form_name))
+            info(repr(form_phone))
+
+            message_text_admin = self.render_string(
+                'mails/admin2.txt',
+                name=form_name,
+                phone=form_phone,
+
+                browser_date=form_browser_date,
+                url=form_url
+            )
+
+            subject_manager = 'Кто-то запросил прайс RodeoStar: %s' % datetime.now()
+            # if form_url:
+                
+            send_email('noreply@rodeostar.ru', options.email, subject_manager, message_text_admin, '127.0.0.1')
+            # info('send_mail: %s' % form_email)
+                
+        except Exception as e:
+            exception(e)
+            error(repr(form_name))
+            error(repr(form_phone))
+
+        # self.write('post::submitForm')
+        # self.finish()
+
+        # template = 'submit-%s.html' % form_type if form_type in SUBMIT_TMP else 'submit.html'
+
+        # template = 'submit.html'
+
+        # self.render(template)
+        self.write('done')
 
 class HomePage(BaseHandler):
     @gen.coroutine
@@ -236,6 +279,7 @@ class App(Application):
 
         handlers = [
             ('/submit', SubmitFormHandler),
+            ('/callMe', CallMeFormHandler),
 
             ('/', HomePage),
 

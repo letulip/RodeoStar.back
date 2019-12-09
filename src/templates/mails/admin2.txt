@@ -1,8 +1,6 @@
 Привет!
 
-{{ name }} скачал прайс-лист с сайта RodeoStar, ты рад?
-Вот его телефон: {{ phone }}
-Вот его Email: {{ email }}
+{{ name }} с RodeoStar просит тебя перезвонить ему по номеру {{ phone }}
 {% if browser_date or url %}
 
 {% if browser_date %}Browser date: {{ browser_date }}{% end %}
