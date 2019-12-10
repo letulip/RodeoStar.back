@@ -141,6 +141,8 @@ class SubmitFormHandler(BaseHandler):
         self.redirect('/')
 
     def post(self):
+        form_price = self.get_argument('form_price', None)
+        form_callme = self.get_argument('form_callme', None)
         form_name = self.get_argument('form_name', None)
         form_email = self.get_argument('form_email', None)
         form_phone = self.get_argument('form_phone', None)
@@ -152,15 +154,26 @@ class SubmitFormHandler(BaseHandler):
             info(repr(form_email))
             info(repr(form_phone))
 
-            message_text_admin = self.render_string(
-                'mails/admin.txt',
-                name=form_name,
-                email=form_email,
-                phone=form_phone,
+            if form_price:
+                message_text_admin = self.render_string(
+                    'mails/admin.txt',
+                    email=form_email,
+                    name=form_name,
+                    phone=form_phone,
 
-                browser_date=form_browser_date,
-                url=form_url
-            )
+                    browser_date=form_browser_date,
+                    url=form_url
+                )
+
+            if form_callme:
+                message_text_admin = self.render_string(
+                    'mails/admin2.txt',
+                    name=form_name,
+                    phone=form_phone,
+
+                    browser_date=form_browser_date,
+                    url=form_url
+                )
 
             message_text_client = self.render_string(
                 'mails/talk.txt',
@@ -174,12 +187,13 @@ class SubmitFormHandler(BaseHandler):
                 url=form_url
             )
 
-            subject_client = 'Вы запросили прайс RodeoStar: %s' % datetime.now().strftime("%Y.%m.%d, %H:%M")
+            if form_price:
+                subject_client = 'Вы запросили прайс RodeoStar: %s' % datetime.now().strftime("%Y.%m.%d, %H:%M")
+                send_email('noreply@rodeostar.ru', form_email, subject_client, message_text_client, '127.0.0.1')
+
             subject_manager = '%s запросил прайс RodeoStar: %s' % (form_name, datetime.now().strftime("%Y.%m.%d, %H:%M"))
-            # if form_url:
-                
-            send_email('noreply@rodeostar.ru', form_email, subject_client, message_text_client, '127.0.0.1')
             send_email('noreply@rodeostar.ru', options.email, subject_manager, message_text_admin, '127.0.0.1')
+
             info('send_mail: %s' % form_email)
             
         except Exception as e:
