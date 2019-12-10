@@ -2,7 +2,11 @@
   <nav class="mainNav">
     <ul class="mainNav__list">
       <li class="mainNav__item mainNav__item--logo">
-        <a href="./"><img src="img/logo.png" width="73" height="88" alt="Логотип РодеоСтар" class="logo"></a>
+        {% if alternative %}
+          <img src="img/logo.png" width="73" height="88" alt="Логотип РодеоСтар" class="logo">
+        {% else %}
+          <a href="./"><img src="img/logo.png" width="73" height="88" alt="Логотип РодеоСтар" class="logo"></a>
+        {% end %}
       </li>
       <li class="mainNav__item mainNav__item--mobile">
         <a href="./#knowhow" class="mainNav__link">Как мы работаем</a>
