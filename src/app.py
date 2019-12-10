@@ -174,8 +174,8 @@ class SubmitFormHandler(BaseHandler):
                 url=form_url
             )
 
-            subject_client = 'Вы запросили прайс RodeoStar: %s' % datetime.now()
-            subject_manager = '%s запросил прайс RodeoStar: %s' % (form_name, datetime.now())
+            subject_client = 'Вы запросили прайс RodeoStar: %s' % datetime.now().strftime("%Y.%m.%d, %H:%M")
+            subject_manager = '%s запросил прайс RodeoStar: %s' % (form_name, datetime.now().strftime("%Y.%m.%d, %H:%M"))
             # if form_url:
                 
             send_email('noreply@rodeostar.ru', form_email, subject_client, message_text_client, '127.0.0.1')
@@ -221,7 +221,7 @@ class CallMeFormHandler(BaseHandler):
                 url=form_url
             )
 
-            subject_manager = '%s просит перезвонить c RodeoStar: %s' % (form_name, datetime.now())
+            subject_manager = '%s просит перезвонить c RodeoStar: %s' % (form_name, datetime.now().strftime("%Y.%m.%d, %H:%M"))
             # if form_url:
 
             send_email('noreply@rodeostar.ru', options.email, subject_manager, message_text_admin, '127.0.0.1')
