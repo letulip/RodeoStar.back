@@ -209,45 +209,12 @@ class SubmitFormHandler(BaseHandler):
 
         template = 'submit.html'
 
-        self.render(template)
-        # self.write('done')
-
-class CallMeFormHandler(BaseHandler):
-    def get(self):
-        self.redirect('/')
-
-    def post(self):
-        form_name = self.get_argument('form_name', None)
-        form_phone = self.get_argument('form_phone', None)
-        form_browser_date = self.get_argument('browserDate', None)
-        form_url = self.get_argument('url', None)
-
-        try:
-            info(repr(form_name))
-            info(repr(form_phone))
-
-            message_text_admin = self.render_string(
-                'mails/admin2.txt',
-                name=form_name,
-                phone=form_phone,
-
-                browser_date=form_browser_date,
-                url=form_url
-            )
-
-            subject_manager = '%s просит перезвонить c RodeoStar: %s' % (form_name, datetime.now().strftime("%Y.%m.%d, %H:%M"))
-            # if form_url:
-
-            send_email('noreply@rodeostar.ru', options.email, subject_manager, message_text_admin, '127.0.0.1')
-            # info('send_mail: %s' % form_email)
-
-        except Exception as e:
-            exception(e)
-            error(repr(form_name))
-            error(repr(form_phone))
+        if form_price:
+            self.render(template)
+        if form_callme:
+            self.render(template, alternative=True)
 
         # self.write('done')
-        self.redirect('/')
 
 class HomePage(BaseHandler):
     @gen.coroutine
@@ -286,7 +253,7 @@ class App(Application):
 
         handlers = [
             ('/submit', SubmitFormHandler),
-            ('/callMe', CallMeFormHandler),
+            ('/callMe', SubmitFormHandler),
 
             ('/', HomePage),
 

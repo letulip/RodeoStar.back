@@ -14,11 +14,21 @@
   <main class="pageMain">
     <section class="content">
       <article class="content__article">
-        <h2 class="heading heading--h2 heading--action heading--light heading--center heading--marginTop-big heading--narrow">Письмо успешно отправлено</h2>
-        <div class="hr"></div>
-        <p class="text text--common text--center">
-          Проверьте свой почтовый ящик, пожалуйста, ссылка на прайс-лист отправлена на указанный вами электонный адрес.
-        </p>
+        {% if alternative %}
+          <h2 class="heading heading--h2 heading--action heading--light heading--center heading--marginTop-big heading--narrow">Ожидайте звонка вашего персонального менеджера</h2>
+          <div class="hr"></div>
+          <p class="text text--common text--center">
+            Менеджер свяжется с вами в ближайшее возможное время.
+          </p>
+        {% else %}
+          <h2 class="heading heading--h2 heading--action heading--light heading--center heading--marginTop-big heading--narrow">Письмо успешно отправлено</h2>
+          <div class="hr"></div>
+          <p class="text text--common text--center">
+            Проверьте свой почтовый ящик, пожалуйста.<br>
+            Ссылка на прайс-лист отправлена на указанный вами электонный адрес.<br>
+            Если письма нет во Входящих - проверьте папку Спам, пожалуйста.
+          </p>
+        {% end %}
         <p class="text text--common text--center">
           <br>
           <a class="text text--common" href="./">Вернуться на главную страницу сайта</a>
