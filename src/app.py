@@ -221,26 +221,19 @@ class CallMeFormHandler(BaseHandler):
                 url=form_url
             )
 
-            subject_manager = 'Кто-то запросил прайс RodeoStar: %s' % datetime.now()
+            subject_manager = '%s просит перезвонить c RodeoStar: %s' % (form_name, datetime.now())
             # if form_url:
-                
+
             send_email('noreply@rodeostar.ru', options.email, subject_manager, message_text_admin, '127.0.0.1')
             # info('send_mail: %s' % form_email)
-                
+
         except Exception as e:
             exception(e)
             error(repr(form_name))
             error(repr(form_phone))
 
-        # self.write('post::submitForm')
-        # self.finish()
-
-        # template = 'submit-%s.html' % form_type if form_type in SUBMIT_TMP else 'submit.html'
-
-        # template = 'submit.html'
-
-        # self.render(template)
-        self.write('done')
+        # self.write('done')
+        self.redirect('/')
 
 class HomePage(BaseHandler):
     @gen.coroutine
