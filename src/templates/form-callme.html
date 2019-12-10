@@ -2,13 +2,13 @@
   <fieldset class="form__fieldset">
     <label class="form__label">
       <span class="text text--light-grey text--sm">Ваше имя</span>
-      <input type="text" class="form__input" id="form_name" name="form_name" placeholder="Иван Иванов" required>
+      <input type="text" class="form__input" id="" name="form_name" placeholder="Иван Иванов" required>
     </label>
     <label class="form__label">
       <span class="text text--light-grey text--sm">Телефон</span>
-      <input type="tel" class="form__input form__input--tel" id="form_phone" name="form_phone" placeholder="+7(999)123-1415" required>
+      <input type="tel" class="form__input form__input--tel" id="" name="form_phone" placeholder="+7(999)123-1415" required>
     </label>
-    <input type="hidden" id="form_callme" name="form_callme" value="callme">
+    <input type="hidden" id="" name="form_callme" value="callme">
     {% module xsrf_form_html() %}
     <button class="button button--action button--center button--submit" type="submit">Перезвоните мне</button>
   </fieldset>

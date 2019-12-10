@@ -2,17 +2,17 @@
   <fieldset class="form__fieldset">
     <label class="form__label">
       <span class="text text--light-grey text--sm">Ваше имя</span>
-      <input type="text" class="form__input" id="form_name" name="form_name" placeholder="Иван Иванов" required>
+      <input type="text" class="form__input" id="" name="form_name" placeholder="Иван Иванов" required>
     </label>
     <label class="form__label">
       <span class="text text--light-grey text--sm">Телефон</span>
-      <input type="tel" class="form__input form__input--tel" id="form_phone" name="form_phone" placeholder="+7(999)123-1415" required>
+      <input type="tel" class="form__input form__input--tel" id="" name="form_phone" placeholder="+7(999)123-1415" required>
     </label>
     <label class="form__label">
       <span class="text text--light-grey text--sm">E-mail</span>
-      <input type="email" class="form__input" id="form_email" name="form_email" placeholder="ivan.ivanov@mail.ru" required>
+      <input type="email" class="form__input" id="" name="form_email" placeholder="ivan.ivanov@mail.ru" required>
     </label>
-    <input type="hidden" id="form_price" name="form_price" value="price">
+    <input type="hidden" id="" name="form_price" value="price">
     {% module xsrf_form_html() %}
     <button class="button button--action button--center button--submit" type="submit">Получить прайс</button>
   </fieldset>
