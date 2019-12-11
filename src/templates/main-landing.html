@@ -113,12 +113,17 @@
     </section>
     <section class="content content--wide">
       <article class="content__article content__article--knowhow knowhow" id="knowhow">
-        <img class="knowhow__img"
-              alt="Знаем, как продавать больше, и научим вас это делать"
-              src="img/knowhow@1x.jpg"
-              srcset="img/knowhow@2x.jpg 3x,
-                      img/knowhow@2x.jpg 2x,
-                      img/knowhow@1x.jpg 1x">
+        <picture class="knowhow__img" loading="lazy">
+          <source srcset="img/knowhow@2x.webp 3x,
+                          img/knowhow@2x.webp 2x,
+                          img/knowhow@1x.webp 1x"
+                  type="image/webp">
+          <source srcset="img/knowhow@2x.jpg 3x,
+                          img/knowhow@2x.jpg 2x,
+                          img/knowhow@1x.jpg 1x"
+                  type="image/jpeg"> 
+          <img class="knowhow__img" src="img/knowhow@1x.jpg" loading="lazy" alt="Знаем, как продавать больше, и научим вас это делать">
+        </picture>
         <div class="knowhow__content">
           <h2 class="heading heading--h2 heading--common">Знаем, как продавать больше, и научим вас это делать</h2>
           <div class="hr hr--center-mobile"></div>
