@@ -27,7 +27,7 @@ from tornado import autoreload, gen
 
 define('debug', default=False, help='debug mode')
 define('port', default=9008, help='port to run on', type=int)
-define('site_url', default='http://test.rodeostar.ru/', help='Site URL')
+define('site_url', default='https://test.rodeostar.ru/', help='Site URL')
 define('cookie_secret', help='secret key for encode cookie')
 define('email', default="ivladimirskiy@ya.ru", help='email for mails')
 define('counters', default=False, help='add counters on the pages', type=bool)
