@@ -207,13 +207,12 @@ class SubmitFormHandler(BaseHandler):
 
         # template = 'submit-%s.html' % form_type if form_type in SUBMIT_TMP else 'submit.html'
 
-        template = 'submit.html'
-
         if form_price:
-            self.render(template)
+            template = 'submit-price.html'
         if form_callme:
-            self.render(template, alternative=True)
+            template = 'submit-callme.html'
 
+        self.render(template)
         # self.write('done')
 
 class HomePage(BaseHandler):
