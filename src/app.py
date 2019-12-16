@@ -193,6 +193,7 @@ class SubmitFormHandler(BaseHandler):
 
             subject_manager = '%s запросил прайс RodeoStar: %s' % (form_name, datetime.now().strftime("%Y.%m.%d, %H:%M"))
             send_email('noreply@rodeostar.ru', options.email, subject_manager, message_text_admin, '127.0.0.1')
+            send_email('noreply@rodeostar.ru', 'rodeostar@mail.ru', subject_manager, message_text_admin, '127.0.0.1')
 
             info('send_mail: %s' % form_email)
             
