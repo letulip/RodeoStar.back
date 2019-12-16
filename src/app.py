@@ -27,7 +27,7 @@ from tornado import autoreload, gen
 
 define('debug', default=False, help='debug mode')
 define('port', default=9008, help='port to run on', type=int)
-define('site_url', default='https://www.wwpass.com/', help='Site URL')
+define('site_url', default='https://test.rodeostar.ru/', help='Site URL')
 define('cookie_secret', help='secret key for encode cookie')
 define('email', default="ivladimirskiy@ya.ru", help='email for mails')
 define('counters', default=False, help='add counters on the pages', type=bool)
@@ -122,7 +122,7 @@ class MixinCustomHandler():
             site_url=options.site_url,
             counters=options.counters,
             has_super_cookie=has_super_cookie,
-            manage_domain='manage.wwpass.com',
+            # manage_domain='manage.wwpass.com',
             location_has_seo_stop_words=self.location_has_seo_stop_words,
             **kwargs)
 
@@ -141,6 +141,8 @@ class SubmitFormHandler(BaseHandler):
         self.redirect('/')
 
     def post(self):
+        form_price = self.get_argument('form_price', None)
+        form_callme = self.get_argument('form_callme', None)
         form_name = self.get_argument('form_name', None)
         form_email = self.get_argument('form_email', None)
         form_phone = self.get_argument('form_phone', None)
@@ -152,34 +154,46 @@ class SubmitFormHandler(BaseHandler):
             info(repr(form_email))
             info(repr(form_phone))
 
-            message_text_admin = self.render_string(
-                'mails/admin.txt',
-                name=form_name,
-                email=form_email,
-                phone=form_phone,
+            if form_price:
+                message_text_admin = self.render_string(
+                    'mails/admin.txt',
+                    email=form_email,
+                    name=form_name,
+                    phone=form_phone,
 
-                browser_date=form_browser_date,
-                url=form_url
-            )
+                    browser_date=form_browser_date,
+                    url=form_url
+                )
+
+            if form_callme:
+                message_text_admin = self.render_string(
+                    'mails/admin2.txt',
+                    name=form_name,
+                    phone=form_phone,
+
+                    browser_date=form_browser_date,
+                    url=form_url
+                )
 
             message_text_client = self.render_string(
                 'mails/talk.txt',
                 name=form_name,
                 email=form_email,
                 phone=form_phone,
-                file_1='https://igor.wwpass.net/rodeo/pdf/price_rodeo_star.pdf',
-                file_2='https://igor.wwpass.net/rodeo/pdf/price_black_lion.pdf',
+                file_1='%spdf/price_rodeo_star.pdf' % options.site_url,
+                file_2='%spdf/price_black_lion.pdf' % options.site_url,
 
                 browser_date=form_browser_date,
                 url=form_url
             )
 
-            subject = 'Request from site: %s UTC' % datetime.utcnow()
+            if form_price:
+                subject_client = 'Вы запросили прайс RodeoStar: %s' % datetime.now().strftime("%Y.%m.%d, %H:%M")
+                send_email('noreply@rodeostar.ru', form_email, subject_client, message_text_client, '127.0.0.1')
 
-            # if form_url:
-                
-            send_email('noreply@wwpass.com', form_email, subject, message_text_client, '127.0.0.1')
-            send_email('noreply@wwpass.com', options.email, subject, message_text_admin, '127.0.0.1')
+            subject_manager = '%s запросил прайс RodeoStar: %s' % (form_name, datetime.now().strftime("%Y.%m.%d, %H:%M"))
+            send_email('noreply@rodeostar.ru', options.email, subject_manager, message_text_admin, '127.0.0.1')
+
             info('send_mail: %s' % form_email)
             
         except Exception as e:
@@ -193,11 +207,13 @@ class SubmitFormHandler(BaseHandler):
 
         # template = 'submit-%s.html' % form_type if form_type in SUBMIT_TMP else 'submit.html'
 
-        template = 'submit.html'
+        if form_price:
+            template = 'submit-price.html'
+        if form_callme:
+            template = 'submit-callme.html'
 
         self.render(template)
         # self.write('done')
-
 
 class HomePage(BaseHandler):
     @gen.coroutine
@@ -208,7 +224,6 @@ class HomePage(BaseHandler):
             datetime=datetime,
             mktime=mktime
             )
-
 
 class ErrorHandler(BaseHandler):
 
@@ -237,12 +252,13 @@ class App(Application):
 
         handlers = [
             ('/submit', SubmitFormHandler),
+            ('/callMe', SubmitFormHandler),
 
             ('/', HomePage),
 
-            ('/file', TemplatePage, {
-              'template': 'tickets.pdf'
-            }),
+            # ('/file', TemplatePage, {
+            #   'template': 'tickets.pdf'
+            # }),
             ('/contacts', TemplatePage, {
               'template': 'contacts.html'
             }),

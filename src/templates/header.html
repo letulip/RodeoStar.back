@@ -1,0 +1,33 @@
+<header class="pageHeader">
+  <nav class="mainNav">
+    <ul class="mainNav__list">
+      <li class="mainNav__item mainNav__item--logo">
+        {% if alternative %}
+          <img src="img/logo.svg" width="73" height="88" alt="Логотип РодеоСтар" class="logo">
+        {% else %}
+          <a href="./"><img src="img/logo.svg" width="73" height="88" alt="Логотип РодеоСтар" class="logo"></a>
+        {% end %}
+      </li>
+      <li class="mainNav__item mainNav__item--mobile">
+        <a href="./#knowhow" class="mainNav__link mainNav__link--underline">Как мы работаем</a>
+      </li>
+      <li class="mainNav__item mainNav__item--mobile">
+        <a href="./#coop" class="mainNav__link mainNav__link--underline">Преимущества</a>
+      </li>
+      <li class="mainNav__item mainNav__item--mobile">
+        <a href="./contacts" class="mainNav__link mainNav__link--underline">Контакты</a>
+      </li>
+      <li class="mainNav__item mainNav__item--wide">
+        <a href="tel:+78007654321" class="mainNav__link mainNav__link--phone">8 800 765 43 21</a>
+      </li>
+      <li class="mainNav__item mainNav__item--wide mainNav__item--mobile mainNav__item--marginTop-mobile mainNav__item--noBorderBottom">
+        <div class="button button--common button--ghost button--callMe">Обратный звонок</div>
+      </li>
+      <li class="mainNav__item mainNav__item--burger">
+        <div class="mainNav__burger">
+
+        </div>
+      </li>
+    </ul>
+  </nav>
+</header>
