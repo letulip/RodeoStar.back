@@ -26,7 +26,7 @@ from tornado import autoreload, gen
 
 
 define('debug', default=False, help='debug mode')
-define('port', default=9008, help='port to run on', type=int)
+define('port', default=9009, help='port to run on', type=int)
 define('site_url', default='https://rodeostar.ru/', help='Site URL')
 define('cookie_secret', help='secret key for encode cookie')
 define('email', default="lordalf96@gmail.com", help='1st email for mails')
