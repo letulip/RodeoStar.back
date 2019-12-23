@@ -27,9 +27,11 @@ from tornado import autoreload, gen
 
 define('debug', default=False, help='debug mode')
 define('port', default=9008, help='port to run on', type=int)
-define('site_url', default='https://test.rodeostar.ru/', help='Site URL')
+define('site_url', default='https://rodeostar.ru/', help='Site URL')
 define('cookie_secret', help='secret key for encode cookie')
-define('email', default="ivladimirskiy@ya.ru", help='email for mails')
+define('email', default="lordalf96@gmail.com", help='1st email for mails')
+define('email_rodeo', default="rodeostar@mail.ru", help='2nd email for mails')
+define('email_noreply', default="noreply@rodeostar.ru", help='noreply email for mails')
 define('counters', default=False, help='add counters on the pages', type=bool)
 
 
@@ -177,7 +179,7 @@ class SubmitFormHandler(BaseHandler):
                     url=form_url
                 )
                 subject_client = 'Вы запросили прайс RodeoStar: %s' % datetime.now().strftime("%Y.%m.%d, %H:%M")
-                send_email('noreply@test.rodeostar.ru', form_email, subject_client, message_text_client, '127.0.0.1')
+                send_email(options.email_noreply, form_email, subject_client, message_text_client, '127.0.0.1')
 
             if form_callme:
                 message_text_admin = self.render_string(
@@ -190,8 +192,8 @@ class SubmitFormHandler(BaseHandler):
                 )
 
             subject_manager = '%s запросил прайс RodeoStar: %s' % (form_name, datetime.now().strftime("%Y.%m.%d, %H:%M"))
-            send_email('noreply@test.rodeostar.ru', options.email, subject_manager, message_text_admin, '127.0.0.1')
-            send_email('noreply@test.rodeostar.ru', 'rodeostar@mail.ru', subject_manager, message_text_admin, '127.0.0.1')
+            send_email(options.email_noreply, options.email, subject_manager, message_text_admin, '127.0.0.1')
+            send_email(options.email_noreply, options.email_rodeo, subject_manager, message_text_admin, '127.0.0.1')
 
             info('send_mail: %s' % form_email)
             
