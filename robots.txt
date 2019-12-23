@@ -1,0 +1,11 @@
+User-agent: *
+Allow: .js
+Allow: .css
+Allow: /wp-*.png
+Allow: /wp-*.jpg
+Allow: /wp-*.jpeg
+Allow: /wp-*.gif
+Disallow: /submit
+Disallow: /callMe
+
+Sitemap: https://test.rodeostar.ru/sitemap.xml
