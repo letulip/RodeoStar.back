@@ -35,15 +35,6 @@ define('email_noreply', default="noreply@rodeostar.ru", help='noreply email for 
 define('counters', default=False, help='add counters on the pages', type=bool)
 
 
-def date_hook(json_dict):
-    for (key, value) in json_dict.items():
-        try:
-            json_dict[key] = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S")
-        except:
-            pass
-    return json_dict
-
-
 def send_email(sender, recipient, subject, text, server='localhost'):
     # Open the plain text file whose name is in textfile for reading.
     # msg = EmailMessage()
@@ -180,6 +171,7 @@ class SubmitFormHandler(BaseHandler):
                 )
                 subject_client = 'Вы запросили прайс RodeoStar: %s' % datetime.now().strftime("%Y.%m.%d, %H:%M")
                 send_email(options.email_noreply, form_email, subject_client, message_text_client, '127.0.0.1')
+                template = 'submit-price.html'
 
             if form_callme:
                 message_text_admin = self.render_string(
@@ -190,6 +182,7 @@ class SubmitFormHandler(BaseHandler):
                     browser_date=form_browser_date,
                     url=form_url
                 )
+                template = 'submit-callme.html'
 
             subject_manager = '%s запросил прайс RodeoStar: %s' % (form_name, datetime.now().strftime("%Y.%m.%d, %H:%M"))
             send_email(options.email_noreply, options.email, subject_manager, message_text_admin, '127.0.0.1')
@@ -205,13 +198,6 @@ class SubmitFormHandler(BaseHandler):
 
         # self.write('post::submitForm')
         # self.finish()
-
-        # template = 'submit-%s.html' % form_type if form_type in SUBMIT_TMP else 'submit.html'
-
-        if form_price:
-            template = 'submit-price.html'
-        if form_callme:
-            template = 'submit-callme.html'
 
         self.render(template)
         # self.write('done')
